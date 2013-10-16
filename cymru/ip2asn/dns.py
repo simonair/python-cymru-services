@@ -135,13 +135,16 @@ class DNSClient(DNSCoreClient):
     qType,realq=extra
     log.debug('Real query : %s , qname : %s '%(realq,qname))
     if (len(answer[3])==0):
-      log.warning('No lookup for %s'%(qname))
+      log.warning('Lookup for %s failed: %r'%(qname, answer))
       r=record()
+      log.debug('Not caching result')
     else:
       result=answer[3][0][0]
       parts=result.split("|")
       r=recordMaker(*parts)
-    self.cache.cache(realq,r,qType)
+      # Only cache successful lookups
+      log.debug('Cache result')
+      self.cache.cache(realq,r,qType)
 
   '''
     #(0, None, 1259120947, (('9003 | 78.155.128.0/19 | FR | ripencc | 2007-07-31',),)) 25.138.155.78.origin.asn.cymru.com. 16 0 None  
