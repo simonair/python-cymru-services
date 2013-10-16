@@ -9,7 +9,7 @@
 
 import logging
 
-log = logging.getLogger('cache')
+log = logging.getLogger('cymru.core.cache')
 
 try :
     import memcache

@@ -15,7 +15,7 @@ import IPy
 
 import cache
 
-log = logging.getLogger('core.dns')
+log = logging.getLogger('cymru.core.dns')
 
 
 def iterwindow(l, slice=50):
